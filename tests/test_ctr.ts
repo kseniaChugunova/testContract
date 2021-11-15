@@ -39,12 +39,14 @@ describe('test_ctr', () => {
   it("Updates the owner", async () => {
     const nominator = new anchor.BN(10);
     const denominator = new anchor.BN(20);
-    await program.rpc.update({
+    await program.rpc.update(
+        nominator,
+        denominator,
+        {
         accounts: {
           ownerAccount: newOwnerAccount.publicKey,
         },
-        nominator,
-        denominator,
+
         instructions: [
           await program.account.user.createInstruction(newOwnerAccount),
         ],
@@ -58,15 +60,26 @@ describe('test_ctr', () => {
   });
 
   it("Converts", async () => {
-    await program.rpc.convert({
+
+    const token_amount_a = new anchor.BN(50);
+
+    // let ownerAccount = await program.account.owner.fetch(newOwnerAccount.publicKey);
+    // let userAccount = await program.account.user.fetch(newAccount.publicKey);
+    // console.log("{}", userAccount.tokenA);
+    // console.log("{}", userAccount.tokenB);
+    console.log("{}", newAccount.publicKey);
+    await program.rpc.convert(
+      token_amount_a,
+      {
         accounts: {
-          userAccount: newAccount.publicKey,
-          ownerAccount: newOwnerAccount.publicKey,
-        },
-        token_amount_a: 50,
+           userAccount: newAccount.publicKey,
+           ownerAccount: newOwnerAccount.publicKey,
+        }
       });
 
-    let ownerAccount = await program.account.owner.fetch(newOwnerAccount.publicKey);
+    //let userAccount = await program.account.owner.fetch(ownerAccount.publicKey);
+    console.log("{}", userAccount.tokenA);
+    console.log("{}", userAccount.tokenB);
     assert.ok(userAccount.tokenA.toNumber() === 50);
     assert.ok(userAccount.tokenB.toNumber() === 120);
   });
