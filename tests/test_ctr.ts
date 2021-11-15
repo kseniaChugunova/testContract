@@ -24,7 +24,11 @@ describe('test_ctr', () => {
       await program.rpc.initialize({
         accounts: {
           userAccount: newAccount.publicKey,
-        }
+        },
+         instructions: [
+          await program.account.user.createInstruction(newAccount),
+        ],
+        signers: [newAccount],
       });
 
     let userAccount = await program.account.user.fetch(newAccount.publicKey);
@@ -33,12 +37,19 @@ describe('test_ctr', () => {
   });
 
   it("Updates the owner", async () => {
+    const nominator = new anchor.BN(10);
+    const denominator = new anchor.BN(20);
     await program.rpc.update({
         accounts: {
           ownerAccount: newOwnerAccount.publicKey,
-        }
-      }, 10,
-        20,
+        },
+        nominator,
+        denominator,
+        instructions: [
+          await program.account.user.createInstruction(newOwnerAccount),
+        ],
+        signers: [newOwnerAccount],
+    }
 );
 
     let ownerAccount = await program.account.owner.fetch(newOwnerAccount.publicKey);

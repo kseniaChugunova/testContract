@@ -1,23 +1,5 @@
 use anchor_lang::prelude::*;
 
-//declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
-
-// #[program]
-// pub mod test_ctr {
-//     use super::*;
-//     pub fn initialize(ctx: Context<Initialize>) -> ProgramResult {
-//         Ok(())
-//     }
-// }
-
-// #[derive(Accounts)]
-// pub struct Initialize {}
-
-
-
-// use anchor_lang::prelude::*;
-// use anchor_spl::token::Approve;
-
 declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
 #[program]
@@ -69,14 +51,14 @@ pub struct Convert<'info> {
 
 #[derive(Accounts)]
 pub struct Update<'info> {
-    #[account(mut)]
-    pub owner_account: Account<'info, Owner>,
+    #[account(zero)]
+    pub owner_account: ProgramAccount<'info, Owner>,
 }
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(mut)]
-    pub user_account: Account<'info, User>,
+    #[account(zero)]
+    pub user_account: ProgramAccount<'info, User>,
 }
 
 #[account]
