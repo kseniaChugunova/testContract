@@ -44,9 +44,9 @@ pub mod test_ctr{
 #[derive(Accounts)]
 pub struct Convert<'info> {
     #[account(mut)]
-    pub user_account: Account<'info, User>,
+    pub user_account: ProgramAccount<'info, User>,
     #[account(mut)]
-    pub owner_account: Account<'info, Owner>,
+    pub owner_account: ProgramAccount<'info, Owner>,
 }
 
 #[derive(Accounts)]

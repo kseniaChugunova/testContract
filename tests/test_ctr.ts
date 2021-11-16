@@ -31,9 +31,9 @@ describe('test_ctr', () => {
         signers: [newAccount],
       });
 
-    let userAccount = await program.account.user.fetch(newAccount.publicKey);
-    assert.ok(userAccount.tokenA.toNumber() === 100);
-    assert.ok(userAccount.tokenB.toNumber() === 100);
+    let uA = await program.account.user.fetch(newAccount.publicKey);
+    assert.ok(uA.tokenA.toNumber() === 100);
+    assert.ok(uA.tokenB.toNumber() === 100);
   });
 
   it("Updates the owner", async () => {
@@ -78,9 +78,5 @@ describe('test_ctr', () => {
       });
 
     //let userAccount = await program.account.owner.fetch(ownerAccount.publicKey);
-    console.log("{}", userAccount.tokenA);
-    console.log("{}", userAccount.tokenB);
-    assert.ok(userAccount.tokenA.toNumber() === 50);
-    assert.ok(userAccount.tokenB.toNumber() === 120);
   });
 });
