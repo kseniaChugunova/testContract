@@ -65,7 +65,14 @@
   dependencies:
     buffer "~6.0.3"
 
-"@solana/web3.js@^1.17.0":
+"@solana/spl-token-registry@^0.2.299":
+  version "0.2.299"
+  resolved "https://registry.yarnpkg.com/@solana/spl-token-registry/-/spl-token-registry-0.2.299.tgz#b2d880bcd9c1815f835f6707a59920db0a644305"
+  integrity sha512-vZ0agQG2Lyzs5DDFiitaHMxB5ubQjXrWXjr+4a+VAPmlxmLRWpzCGg6AzDUi6uyE/5cpGrPW1qNDkFiv+pwtqA==
+  dependencies:
+    cross-fetch "3.0.6"
+
+"@solana/web3.js@^1.17.0", "@solana/web3.js@^1.30.2":
   version "1.30.2"
   resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.30.2.tgz#e85da75e0825dc64f53eb64a1ff0115b27bec135"
   integrity sha512-hznCj+rkfvM5taRP3Z+l5lumB7IQnDrB4l55Wpsg4kDU9Zds8pE5YOH5Z9bbF/pUzZJKQjyBjnY/6kScBm3Ugg==
@@ -395,6 +402,13 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
+
+cross-fetch@3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.6.tgz#3a4040bc8941e653e0e9cf17f29ebcd177d3365c"
+  integrity sha512-KBPUbqgFjzWlVcURG+Svp9TlhA5uliYtiNx/0r8nv0pdypeQCRJ9IaSIc3q/x3q8t3F75cHuwxVql1HFGHCNJQ==
+  dependencies:
+    node-fetch "2.6.1"
 
 cross-fetch@^3.1.4:
   version "3.1.4"
