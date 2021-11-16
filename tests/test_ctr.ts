@@ -77,6 +77,8 @@ describe('test_ctr', () => {
         }
       });
 
-    //let userAccount = await program.account.owner.fetch(ownerAccount.publicKey);
+    let userAccount1 = await program.account.user.fetch(newAccount.publicKey);
+    assert.ok(userAccount1.tokenA.toNumber() === 50);
+    assert.ok(userAccount1.tokenB.toNumber() === 125);
   });
 });
