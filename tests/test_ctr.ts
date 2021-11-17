@@ -62,13 +62,18 @@ describe('test_ctr', () => {
 
   it("Converts", async () => {
 
-    const user_token_amount_a = new anchor.BN(50);
-    const user_token_amount_b = new anchor.BN(50);
-    const vault_token_amount_a = new anchor.BN(50);
-    const vault_token_amount_b = new anchor.BN(50);
+    const user_token_amount_a = 50;
+    const user_token_amount_b = 50;
+    const vault_token_amount_a = 50;
+    const vault_token_amount_b = 50;
     const token_amount_a_to_convert = new anchor.BN(5);
 
     const mintAuthority = anchor.web3.Keypair.generate();
+
+    await provider.connection.confirmTransaction(
+      await provider.connection.requestAirdrop(newAccount.publicKey, 10000000000),
+      "confirmed"
+    );
 
     const mintA = await Token.createMint(
           provider.connection,
@@ -125,28 +130,20 @@ describe('test_ctr', () => {
             authority: newAccount.publicKey, 
             tokenProgram: TOKEN_PROGRAM_ID,
             userTokenAWallet: userTokenA,
-            userTokenAWallet: userTokenA,
+            userTokenBWallet: userTokenB,
             vaultTokenA: vaultTokenA,
             vaultTokenB: vaultTokenB,
             ownerAccount: newOwnerAccount.publicKey,
           };
 
-    // let ownerAccount = await program.account.owner.fetch(newOwnerAccount.publicKey);
-    // let userAccount = await program.account.user.fetch(newAccount.publicKey);
-    // console.log("{}", userAccount.tokenA);
-    // console.log("{}", userAccount.tokenB);
-    console.log("{}", newAccount.publicKey);
     await program.rpc.convert(
       token_amount_a_to_convert,
       {
         accounts: accountsForConvert,
          signers: [
                   newAccount,
-                  newVaultAccount,
-              ],
-              // instructions: [
-              //     await program.account.pool.createInstruction(pool),
-              // ],
+                  TOKEN_PROGRAM_ID
+              ]
       });
 
     // let userAccount1 = await program.account.user.fetch(newAccount.publicKey);
